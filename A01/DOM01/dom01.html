@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM01</title>
+</head>
+
+<body>
+  <h1>Introduce un número (1-100)</h1>
+  <input type="number" id="miInput">
+  <button id="miBoton">Dame!</button>
+  <p id="miParrafo">Mi parrafo</p>
+
+  <script>
+    // se genera un número aleatorio entre 1 y 100
+    const numeroOculto = Math.floor((Math.random() * 100) + 1);
+
+    // instancio los elementos necesarios del DOM (html)
+    const constMiParrafo = document.getElementById("miParrafo");
+    const constMiBoton = document.getElementById("miBoton");
+    const constMiInput = document.getElementById("miInput");
+    const constParrafoIntentos = document.getElementById("miParrafoIntentos");
+    const constParrafoNumeros = document.getElementById("miParrafoNumeros");
+    var numero_intentos = 0
+    var listaNumeros = "";
+
+    // constMiParrafo.textContent = "el numero oculo es " + numeroOculto;
+
+      constMiBoton.addEventListener("click", () => {
+        numero_intentos++;
+        constParrafoIntentos.textContent= ("Número intentos: " + numero_intentos);
+        const numeroInput = parseInt(constMiInput.value, 10);
+
+
+        listaNumeros= listaNumeros + " " + numeroInput;
+        constParrafoNumeros.textContent = "Números jugados " + listaNumeros;
+
+        //SONIDO
+        // JUEGO AVANZADO
+
+
+        // acierta
+        /**********
+            caliente/frio
+
+            quemando        +-3
+            muy caliente    +-8
+            caliente        +-13 "eres malillo"
+            templao         +-18 "eres del montón"
+            fresquibiris    +-25 "eres grande"
+            frío            +-28 "eres dios"
+        ***********/
+
+        if (numeroOculto == numeroInput) {
+          constMiParrafo.textContent = "ENHORABUENA!!";
+          constMiParrafo.style.color = "green";
+
+          let ranking = "malillo";
+
+          if (numero_intentos<=4)
+          {
+          ranking= "Dios";
+          }
+
+          else if (numero_intentos<=8)
+
+          {
+            ranking = "Grande"
+          }
+
+          else if (numero_intentos<=14)
+          {
+            ranking = "del Montón"
+          }
+
+          
+
+          constMiParrafo.textContent = "Eres " + ranking;
+
+        }
+
+
+        else if (Math.abs(numeroOculto - numeroInput) < 3) {
+          constMiParrafo.textContent = "QUEMANDO!!";
+          constMiParrafo.style.color = "red";
+        }
+
+        else if (Math.abs(numeroOculto - numeroInput) < 8) {
+          constMiParrafo.textContent = "MUY CALIENTE!!";
+          constMiParrafo.style.color = "orange";
+        }
+
+        else if (Math.abs(numeroOculto - numeroInput) < 13) {
+          constMiParrafo.textContent = "CALIENTE!!";
+          constMiParrafo.style.color = "yellow";
+        }
+
+        else if (Math.abs(numeroOculto - numeroInput) < 18) {
+          constMiParrafo.textContent = "TEMPLADO!!";
+          constMiParrafo.style.color = "black";
+        }
+
+        else if (Math.abs(numeroOculto - numeroInput) < 23) {
+          constMiParrafo.textContent = "FRESQUIBIRIS!!";
+          constMiParrafo.style.color = "blue";
+        }
+
+        else {
+          constMiParrafo.textContent = "FRÍO HELAO!!";
+          constMiParrafo.style.color = "purple";
+        }
+      });
+    
+  </script>
+
+</body>
+
+</html>
